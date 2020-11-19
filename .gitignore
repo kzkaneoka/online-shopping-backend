@@ -1,3 +1,7 @@
 .DS_Store
 node_modules
 config/config.env
+models/Bootcamp.js
+models/Course.js
+_data/bootcamps.json
+_data/courses.json
