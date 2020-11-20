@@ -4,13 +4,15 @@
     "_id": "5fb72b1d90b2a21981371ca4",
     "name": "iPhone XR",
     "price": 499,
+    "category": "5fb771fd7690d63ddc22c53f",
     "__v": 0
   },
   {
     "photo": "iphone-11.jpg",
-    "_id": "5fb72b5690b2a21981371ca5",
+    "_id": "5fb72b1d90b2a21981371ce3",
     "name": "iPhone 11",
     "price": 599,
+    "category": "5fb771fd7690d63ddc22c53f",
     "__v": 0
   },
   {
@@ -18,6 +20,7 @@
     "_id": "5fb72b7a90b2a21981371ca6",
     "name": "iPhone SE",
     "price": 399,
+    "category": "5fb771fd7690d63ddc22c53f",
     "__v": 0
   },
   {
@@ -25,6 +28,7 @@
     "_id": "5fb72bcb90b2a21981371ca7",
     "name": "iPhone 12",
     "price": 699,
+    "category": "5fb771fd7690d63ddc22c53f",
     "__v": 0
   },
   {
@@ -32,6 +36,7 @@
     "_id": "5fb72c0690b2a21981371ca8",
     "name": "iPhone 12 Pro",
     "price": 999,
+    "category": "5fb771fd7690d63ddc22c53f",
     "__v": 0
   }
 ]

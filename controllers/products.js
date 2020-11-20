@@ -52,14 +52,12 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
   // Execute query
   const products = await query;
 
-  res
-    .status(200)
-    .json({
-      success: true,
-      count: products.length,
-      pagination,
-      data: products,
-    });
+  res.status(200).json({
+    success: true,
+    count: products.length,
+    pagination,
+    data: products,
+  });
 });
 
 // @desc    Get product
@@ -87,7 +85,9 @@ exports.addProduct = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/v1/products/:id
 // @access  Private
 exports.updateProduct = asyncHandler(async (req, res, next) => {
-  const product = await Product.findByIdAndDelete(req.params.id);
+  const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
   if (!product) {
     return next(
       new ErrorResponse(`Product not found with id of ${req.params.id}`, 404)

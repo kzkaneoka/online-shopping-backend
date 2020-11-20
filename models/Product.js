@@ -18,6 +18,11 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     default: 'no-photo.png',
   },
+  category: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Category',
+    required: true,
+  },
 });
 
 // Create product slug from the name

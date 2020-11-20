@@ -29,9 +29,11 @@ if (process.env.NODE_ENV === 'development') {
 
 // Routers
 const products = require('./routes/products');
+const categories = require('./routes/categories');
 
 // Use routers
 app.use('/api/v1/products', products);
+app.use('/api/v1/categories', categories);
 
 // Error handler for routers
 // Needs to be declared after routers
