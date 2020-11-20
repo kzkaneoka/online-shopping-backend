@@ -7,6 +7,7 @@ Backend system for online shopping web application
 - Node
 - Express
 - MongoDB
+- Mongoose
 
 ## License
 
