@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const colors = require('colors');
+const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
 // Environment variables
@@ -31,6 +32,11 @@ const products = require('./routes/products');
 
 // Use routers
 app.use('/api/v1/products', products);
+
+// Error handler for routers
+// Needs to be declared after routers
+// in order to catch errors after executing routers
+app.use(errorHandler);
 
 // Let server to listen PORT
 const server = app.listen(
