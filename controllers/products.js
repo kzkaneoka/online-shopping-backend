@@ -1,3 +1,4 @@
+const path = require('path');
 const Product = require('../models/Product');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
@@ -6,58 +7,7 @@ const ErrorResponse = require('../utils/errorResponse');
 // @route   GET /api/v1/products
 // @access  Public
 exports.getProducts = asyncHandler(async (req, res, next) => {
-  const reqQuery = { ...req.query };
-
-  // Exclude some fileds from query
-  const fieldsToExclude = ['select', 'sort', 'page', 'limit'];
-  fieldsToExclude.forEach((param) => delete reqQuery[param]);
-
-  const queryStr = JSON.stringify(reqQuery).replace(
-    /\b(gt|gte|lt|lte|in)\b/g,
-    (match) => `$${match}`
-  );
-
-  // Prepare query
-  let query = Product.find(JSON.parse(queryStr));
-
-  // Select fields if necessary
-  if (req.query.select) {
-    const fields = req.query.select.split(',').join(' ');
-    query = query.select(fields);
-  }
-
-  // Soft fields if necessary
-  if (req.query.sort) {
-    const fields = req.query.sort.split(',').join(' ');
-    query = query.sort(fields);
-  } else {
-    query = query.sort('price');
-  }
-
-  // Pagination
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 20;
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-  const total = await Product.countDocuments();
-  const pagination = { limit };
-  if (endIndex < total) {
-    pagination.next = page + 1;
-  }
-  if (startIndex > 0) {
-    pagination.prev = page - 1;
-  }
-  query = query.skip(startIndex).limit(limit);
-
-  // Execute query
-  const products = await query;
-
-  res.status(200).json({
-    success: true,
-    count: products.length,
-    pagination,
-    data: products,
-  });
+  res.status(200).json(res.advancedResults);
 });
 
 // @desc    Get product
@@ -107,4 +57,47 @@ exports.deleteProduct = asyncHandler(async (req, res, next) => {
     );
   }
   res.status(200).json({ success: true, data: {} });
+});
+
+// @desc    Upload photo for product
+// @route   DELETE /api/v1/products/:id/photo
+// @access  Private
+exports.uploadPhoto = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+  if (!product) {
+    return next(
+      new ErrorResponse(`Product not found with id of ${req.params.id}`, 404)
+    );
+  }
+  if (!req.files) {
+    return next(new ErrorResponse('Please upload file', 400));
+  }
+  const file = req.files.file;
+  if (!file.mimetype.startsWith('image')) {
+    return next(new ErrorResponse('Please upload image file', 400));
+  }
+  if (!file.size > process.env.FILE_UPLOAD_MAX_SIZE) {
+    return next(
+      new ErrorResponse(
+        `Please upload image less than ${process.env.FILE_UPLOAD_MAX_SIZE}`,
+        400
+      )
+    );
+  }
+  file.name = `photo_${product._id}${path.parse(file.name).ext}`;
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
+    if (err) {
+      return next(new ErrorResponse('Problem with file upload', 500));
+    }
+    const product = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        photo: file.name,
+      },
+      {
+        new: true,
+      }
+    );
+    res.status(200).json({ success: true, data: product });
+  });
 });

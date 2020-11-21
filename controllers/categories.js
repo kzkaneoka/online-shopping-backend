@@ -6,42 +6,7 @@ const ErrorResponse = require('../utils/errorResponse');
 // @route   GET /api/v1/courses
 // @access  Public
 exports.getCategories = asyncHandler(async (req, res, next) => {
-  const reqQuery = { ...req.query };
-
-  // Exclude some fileds from query
-  const fieldsToExclude = ['page', 'limit'];
-  fieldsToExclude.forEach((param) => delete reqQuery[param]);
-
-  // Prepare query
-  let query = Category.find(reqQuery);
-
-  // Sort
-  query = query.sort('name');
-
-  // Pagination
-  const page = parseInt(req.query.page, 10) || 1;
-  const limit = parseInt(req.query.limit, 10) || 20;
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-  const total = await Category.countDocuments();
-  const pagination = { limit };
-  if (endIndex < total) {
-    pagination.next = page + 1;
-  }
-  if (startIndex > 0) {
-    pagination.prev = page - 1;
-  }
-  query = query.skip(startIndex).limit(limit);
-
-  // Execute query
-  const categories = await query;
-
-  res.status(200).json({
-    success: true,
-    count: categories.length,
-    pagination,
-    data: categories,
-  });
+  res.status(200).json(res.advancedResults);
 });
 
 // @desc    Get category

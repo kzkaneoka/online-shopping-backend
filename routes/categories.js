@@ -10,7 +10,17 @@ const {
   deleteCategory,
 } = require('../controllers/categories');
 
-router.route('/').get(getCategories).post(addCategory);
+// advancedResults middleware
+const advancedResults = require('../middleware/advancedResults');
+const Category = require('../models/Product');
+
+router
+  .route('/')
+  .get(
+    advancedResults(Category, null, 'name', ['page', 'limit']),
+    getCategories
+  )
+  .post(addCategory);
 
 router
   .route('/:id')

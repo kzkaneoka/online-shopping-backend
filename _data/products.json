@@ -1,41 +1,41 @@
 [
   {
-    "photo": "iphone-xr.jpg",
     "_id": "5fb72b1d90b2a21981371ca4",
     "name": "iPhone XR",
     "price": 499,
     "category": "5fb771fd7690d63ddc22c53f",
+    "photo": "public/uploads/photo_5fb72b1d90b2a21981371ca4.jpg",
     "__v": 0
   },
   {
-    "photo": "iphone-11.jpg",
     "_id": "5fb72b1d90b2a21981371ce3",
     "name": "iPhone 11",
     "price": 599,
+    "photo": "public/uploads/photo_5fb72b1d90b2a21981371ce3.jpg",
     "category": "5fb771fd7690d63ddc22c53f",
     "__v": 0
   },
   {
-    "photo": "iphone-se.jpg",
     "_id": "5fb72b7a90b2a21981371ca6",
     "name": "iPhone SE",
     "price": 399,
+    "photo": "public/uploads/photo_5fb72b7a90b2a21981371ca6.jpg",
     "category": "5fb771fd7690d63ddc22c53f",
     "__v": 0
   },
   {
-    "photo": "iphone-12.jpg",
     "_id": "5fb72bcb90b2a21981371ca7",
     "name": "iPhone 12",
     "price": 699,
+    "photo": "public/uploads/photo_5fb72bcb90b2a21981371ca7.jpg",
     "category": "5fb771fd7690d63ddc22c53f",
     "__v": 0
   },
   {
-    "photo": "iphone-12-pro.jpg",
     "_id": "5fb72c0690b2a21981371ca8",
     "name": "iPhone 12 Pro",
     "price": 999,
+    "photo": "public/uploads/photo_5fb72c0690b2a21981371ca8.jpg",
     "category": "5fb771fd7690d63ddc22c53f",
     "__v": 0
   }

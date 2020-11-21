@@ -8,10 +8,28 @@ const {
   addProduct,
   updateProduct,
   deleteProduct,
+  uploadPhoto,
 } = require('../controllers/products');
 
-router.route('/').get(getProducts).post(addProduct);
+// advancedResults middleware
+const advancedResults = require('../middleware/advancedResults');
+const Product = require('../models/Product');
+
+router
+  .route('/')
+  .get(
+    advancedResults(Product, null, 'price', [
+      'select',
+      'sort',
+      'page',
+      'limit',
+    ]),
+    getProducts
+  )
+  .post(addProduct);
 
 router.route('/:id').get(getProduct).put(updateProduct).delete(deleteProduct);
+
+router.route('/:id/photo').put(uploadPhoto);
 
 module.exports = router;
