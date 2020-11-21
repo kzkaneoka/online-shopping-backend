@@ -84,11 +84,13 @@ exports.updateCategory = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/v1/categories/:id
 // @access  Private
 exports.deleteCategory = asyncHandler(async (req, res, next) => {
-  const category = await Category.findByIdAndDelete(req.params.id);
+  const category = await Category.findById(req.params.id);
   if (!category) {
     return next(
       new ErrorResponse(`Category not found with id of ${req.params.id}`, 404)
     );
   }
+  // this will triger the middleware to delete products belong to this category
+  category.remove();
   res.status(200).json({ success: true, data: {} });
 });

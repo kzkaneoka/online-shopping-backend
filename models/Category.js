@@ -9,4 +9,10 @@ const CategorySchema = new mongoose.Schema({
   },
 });
 
+// Cascade delete products when category is deleted
+CategorySchema.pre('remove', async function (next) {
+  await this.model('Product').deleteMany({ category: this._id });
+  next();
+});
+
 module.exports = mongoose.model('Category', CategorySchema);
