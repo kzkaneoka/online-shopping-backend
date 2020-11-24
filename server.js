@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const colors = require('colors');
 const fileuploader = require('express-fileupload');
+const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
@@ -21,6 +22,9 @@ const app = express();
 // Body parser to use req.body in controllers
 app.use(express.json());
 
+// Cookie Parser to use coookie in controllers
+app.use(cookieParser());
+
 // Middlewares
 const morgan = require('morgan'); // loggar middleware
 
@@ -38,10 +42,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routers
 const products = require('./routes/products');
 const categories = require('./routes/categories');
+const auth = require('./routes/auth');
 
 // Use routers
 app.use('/api/v1/products', products);
 app.use('/api/v1/categories', categories);
+app.use('/api/v1/auth', auth);
 
 // Error handler for routers
 // Needs to be declared after routers

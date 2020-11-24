@@ -15,21 +15,25 @@ const {
 const advancedResults = require('../middleware/advancedResults');
 const Product = require('../models/Product');
 
+// protect middleware for private api
+const { protect, authorize } = require('../middleware/auth');
+
 router
   .route('/')
   .get(
-    advancedResults(Product, null, 'price', [
-      'select',
-      'sort',
-      'page',
-      'limit',
-    ]),
+    advancedResults(Product, null, ['select', 'sort', 'page', 'limit']),
     getProducts
   )
-  .post(addProduct);
+  .post(protect, authorize('seller', 'admin'), addProduct);
 
-router.route('/:id').get(getProduct).put(updateProduct).delete(deleteProduct);
+router
+  .route('/:id')
+  .get(getProduct)
+  .put(protect, authorize('seller', 'admin'), updateProduct)
+  .delete(protect, authorize('seller', 'admin'), deleteProduct);
 
-router.route('/:id/photo').put(uploadPhoto);
+router
+  .route('/:id/photo')
+  .put(protect, authorize('seller', 'admin'), uploadPhoto);
 
 module.exports = router;

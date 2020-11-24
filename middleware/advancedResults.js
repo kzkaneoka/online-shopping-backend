@@ -1,4 +1,4 @@
-const advancedResults = (model, populate, sortedBy, fieldsToExclude) => async (
+const advancedResults = (model, populate, fieldsToExclude) => async (
   req,
   res,
   next
@@ -27,7 +27,7 @@ const advancedResults = (model, populate, sortedBy, fieldsToExclude) => async (
     const fields = req.query.sort.split(',').join(' ');
     query = query.sort(fields);
   } else {
-    query = query.sort(sortedBy);
+    query = query.sort('createdAt');
   }
 
   // Pagination

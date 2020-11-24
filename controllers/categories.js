@@ -2,8 +2,8 @@ const Category = require('../models/Category');
 const asyncHandler = require('../middleware/async');
 const ErrorResponse = require('../utils/errorResponse');
 
-// @desc    Get all courses
-// @route   GET /api/v1/courses
+// @desc    Get all categories
+// @route   GET /api/v1/categories
 // @access  Public
 exports.getCategories = asyncHandler(async (req, res, next) => {
   res.status(200).json(res.advancedResults);

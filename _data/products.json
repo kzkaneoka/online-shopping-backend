@@ -5,6 +5,7 @@
     "price": 499,
     "category": "5fb771fd7690d63ddc22c53f",
     "photo": "public/uploads/photo_5fb72b1d90b2a21981371ca4.jpg",
+    "createdAt": "2020-11-21T08:04:24.882Z",
     "__v": 0
   },
   {
@@ -13,6 +14,7 @@
     "price": 599,
     "photo": "public/uploads/photo_5fb72b1d90b2a21981371ce3.jpg",
     "category": "5fb771fd7690d63ddc22c53f",
+    "createdAt": "2020-11-21T08:05:24.882Z",
     "__v": 0
   },
   {
@@ -21,6 +23,7 @@
     "price": 399,
     "photo": "public/uploads/photo_5fb72b7a90b2a21981371ca6.jpg",
     "category": "5fb771fd7690d63ddc22c53f",
+    "createdAt": "2020-11-21T08:06:24.882Z",
     "__v": 0
   },
   {
@@ -29,6 +32,7 @@
     "price": 699,
     "photo": "public/uploads/photo_5fb72bcb90b2a21981371ca7.jpg",
     "category": "5fb771fd7690d63ddc22c53f",
+    "createdAt": "2020-11-21T08:07:24.882Z",
     "__v": 0
   },
   {
@@ -37,6 +41,7 @@
     "price": 999,
     "photo": "public/uploads/photo_5fb72c0690b2a21981371ca8.jpg",
     "category": "5fb771fd7690d63ddc22c53f",
+    "createdAt": "2020-11-21T08:08:24.882Z",
     "__v": 0
   }
 ]

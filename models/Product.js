@@ -23,6 +23,10 @@ const ProductSchema = new mongoose.Schema({
     ref: 'Category',
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 // Create product slug from the name

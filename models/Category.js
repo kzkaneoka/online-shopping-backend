@@ -7,6 +7,10 @@ const CategorySchema = new mongoose.Schema({
     unique: true,
     required: [true, 'Please add name'],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 // Cascade delete products when category is deleted
